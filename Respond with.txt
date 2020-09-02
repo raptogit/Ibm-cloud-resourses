@@ -1,0 +1,1 @@
+<?context.webhook_result_1.passages.get(0).get("passage_text").getAsString() ?>
