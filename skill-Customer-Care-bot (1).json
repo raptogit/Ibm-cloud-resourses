@@ -1,0 +1,692 @@
+{
+  "intents": [
+    {
+      "intent": "enqiries",
+      "examples": [
+        {
+          "text": "List of item"
+        },
+        {
+          "text": "list of items in store"
+        },
+        {
+          "text": "offer available"
+        },
+        {
+          "text": "offers"
+        },
+        {
+          "text": "offers available"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greetings",
+      "examples": [
+        {
+          "text": "Good Afternoon"
+        },
+        {
+          "text": "Good Evening"
+        },
+        {
+          "text": "Good Morning !"
+        },
+        {
+          "text": "Hello!"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "location",
+      "examples": [
+        {
+          "text": "how can i reach you"
+        },
+        {
+          "text": "location"
+        },
+        {
+          "text": "Where are you located"
+        },
+        {
+          "text": "where is the store located"
+        },
+        {
+          "text": "where is your supplies"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "product_faqs",
+      "examples": [
+        {
+          "text": "Access settings"
+        },
+        {
+          "text": "how do i turn on the heater"
+        },
+        {
+          "text": "How to set time"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "thanks",
+      "examples": [
+        {
+          "text": "bye"
+        },
+        {
+          "text": "bye b"
+        },
+        {
+          "text": "thanks"
+        },
+        {
+          "text": "thank you"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "timing",
+      "examples": [
+        {
+          "text": "time"
+        },
+        {
+          "text": "timings"
+        },
+        {
+          "text": "timings of store"
+        },
+        {
+          "text": "what are store hours"
+        },
+        {
+          "text": "when can i caom to your store"
+        },
+        {
+          "text": "when is your store open?"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "enqiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "list",
+          "synonyms": [
+            "menu"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "offer",
+          "synonyms": [
+            "Discount"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "greet",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Good Afternoon",
+          "synonyms": [
+            "afternoon",
+            "gud afternoon"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Good Evening",
+          "synonyms": [
+            "evening",
+            "gud evening"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Good Morning",
+          "synonyms": [
+            "gm",
+            "gud mrng"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Hello",
+          "synonyms": [
+            "hey",
+            "hi",
+            "hola"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "location",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Mumbai",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Nagpur",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Pune",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "timings",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Saturday",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Sunday",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "https://eu-gb.functions.appdomain.cloud/api/v1/web/rapto1706%40gmail.com_dev/default/discovery%20action.json",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              },
+              {
+                "text": "Sorry Could not understand."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_1_1599046110823",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Product faqs",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "input": "<? input.text?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#product_faqs",
+      "dialog_node": "node_1_1599046110823",
+      "previous_sibling": "node_4_1598528616978"
+    },
+    {
+      "type": "standard",
+      "title": "Timings",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#timing",
+      "dialog_node": "node_4_1598523899934",
+      "previous_sibling": "node_7_1598523353629"
+    },
+    {
+      "type": "standard",
+      "title": "thanks",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Ok bye ! Meet you at the store."
+              },
+              {
+                "text": "Bye meet you soon !"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#thanks",
+      "dialog_node": "node_4_1598528616978",
+      "previous_sibling": "node_9_1598528034889"
+    },
+    {
+      "type": "standard",
+      "title": "greet",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#greetings || @greet",
+      "dialog_node": "node_7_1598521606781",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Location",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#location",
+      "dialog_node": "node_7_1598523353629",
+      "previous_sibling": "node_7_1598521606781"
+    },
+    {
+      "type": "standard",
+      "title": "Enquiry",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#enqiries",
+      "dialog_node": "node_9_1598528034889",
+      "previous_sibling": "node_4_1598523899934"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Store timing on saturday :9:00am-7:00pm"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1598523899934",
+      "conditions": "@timings:Saturday",
+      "dialog_node": "response_10_1598523929194"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Good Evening ! Nice to see you!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1598521606781",
+      "conditions": "@greet:(Good Evening)",
+      "dialog_node": "response_1_1598521992365",
+      "previous_sibling": "response_7_1598521961768"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello nice to see you!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1598521606781",
+      "conditions": "anything_else",
+      "dialog_node": "response_1_1598522621278",
+      "previous_sibling": "response_1_1598521992365"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Bandra station,mumbai..."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1598523353629",
+      "conditions": "@location:Mumbai",
+      "dialog_node": "response_1_1598523421843"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "tation ,opp...,nagpur"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1598523353629",
+      "conditions": "@location:Nagpur",
+      "dialog_node": "response_1_1598523464594",
+      "previous_sibling": "response_1_1598523421843"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Pune station,Near ..,pune"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1598523353629",
+      "conditions": "@location:Pune",
+      "dialog_node": "response_2_1598523491824",
+      "previous_sibling": "response_1_1598523464594"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "title": "List of items",
+            "source": "https://listonic.com/wp-content/uploads/2018/12/shopping-list-template-Basic-Grocery-List.jpg",
+            "response_type": "image"
+          }
+        ]
+      },
+      "parent": "node_9_1598528034889",
+      "conditions": "@enqiry:list",
+      "dialog_node": "response_2_1598528114112",
+      "previous_sibling": "response_8_1598528061091"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Store will be open from 8:00 am to 10:00pm"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1598523899934",
+      "conditions": "anything_else",
+      "dialog_node": "response_4_1598524056890",
+      "previous_sibling": "response_5_1598523997247"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello ! Good Morning, Nice to see you."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1598521606781",
+      "conditions": "@greet:(Good Morning)",
+      "dialog_node": "response_5_1598521849941"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Check our stores in Pune ,Mumbai and Nagpur"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1598523353629",
+      "conditions": "anything_else",
+      "dialog_node": "response_5_1598523545851",
+      "previous_sibling": "response_2_1598523491824"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Store will be closed on sunday."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1598523899934",
+      "conditions": "@timings:Sunday",
+      "dialog_node": "response_5_1598523997247",
+      "previous_sibling": "response_10_1598523929194"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": " Good Afternoon ! Nice to see you"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1598521606781",
+      "conditions": "@greet:(Good Afternoon)",
+      "dialog_node": "response_7_1598521961768",
+      "previous_sibling": "response_5_1598521849941"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "<?context.webhook_result_1.passages.get(0).get(\"passage_text\").getAsString() ?>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1599046110823",
+      "conditions": "$webhook_result_1",
+      "dialog_node": "response_7_1599046336866"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Try Again"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_1_1599046110823",
+      "conditions": "anything_else",
+      "dialog_node": "response_7_1599046340958",
+      "previous_sibling": "response_7_1599046336866"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "n purchase of 2000"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1598528034889",
+      "conditions": "@enqiry:offer",
+      "dialog_node": "response_8_1598528061091"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. I am bot and how can I help you today?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Customer Care bot",
+  "language": "en",
+  "description": ""
+}
