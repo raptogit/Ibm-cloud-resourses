@@ -15,5 +15,5 @@
 
 
 *Website: https://rapto.in/*
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of rapto](https://github.com/raptoservices/Ibm-cloud-resourses/blob/master/Learn%20how%20to%20build%20a.i.%20chatbot%20without%20programmming!%20(1).jpg)
 
