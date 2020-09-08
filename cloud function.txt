@@ -52,8 +52,8 @@ function main(params) {
       'collection_id': params.collection_id,
       'natural_language_query': params.input,
       'passages': true,
-      'count': 3,
-      'passages_count': 3
+      'count': 1,
+      'passages_count': 1
     }, function(err, data) {
       if (err) {
         return reject(err);
